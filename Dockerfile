@@ -1,4 +1,4 @@
-FROM node:16-alpine3.15 as builder
+FROM node:18-alpine as builder
 
 # VOLUME [ "/data" ] # Remove this line: The `VOLUME` keyword is banned in Dockerfiles. Use Railway volumes instead. https://docs.railway.com/reference/volumes
 
@@ -14,7 +14,8 @@ COPY package.json yarn.lock /app/
 WORKDIR /app
 
 RUN npm install -g pnpm
-RUN yarn install && npx browserslist@latest --update-db
+RUN yarn install && npx update-browserslist-db@latest
+
 RUN npm run build:without-migrate
 
 FROM node:16-alpine3.15 as runner
