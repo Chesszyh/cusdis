@@ -1,6 +1,6 @@
 FROM node:16-alpine3.15 as builder
 
-VOLUME [ "/data" ]
+# VOLUME [ "/data" ] # Remove this line: The `VOLUME` keyword is banned in Dockerfiles. Use Railway volumes instead. https://docs.railway.com/reference/volumes
 
 ARG DB_TYPE=sqlite
 ENV DB_TYPE=$DB_TYPE
